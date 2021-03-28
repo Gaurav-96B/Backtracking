@@ -1,25 +1,42 @@
 class Solution {
-    public void buildParenthesis(int n,int open,int close,int index,List<String>s1,String s)
+    public List<List<String>> partition(String s) {
+        List<List<String>>l=new ArrayList<>();
+        List<String>l1=new ArrayList<>();
+        partion(s,l,l1,0);
+        return l;
+        
+    }
+    public void partion(String s,List<List<String>>l,List<String>l1,int startIndex)
     {
-        if(index==2*n)
+        if(startIndex==s.length())
         {
-            s1.add(s);
-            return;
+            l.add(new ArrayList<>(l1));
         }
-        if(open<n)
+        for(int i=startIndex;i<s.length();i++)
         {
-            buildParenthesis(n,open+1,close,index+1,s1,s+"(");
-        }
-        if(close<open)
-        {
-            buildParenthesis(n,open,close+1,index+1,s1,s+")");
+            if(isPallindrom(s,startIndex,i))
+            {
+                l1.add(s.substring(startIndex,i+1));
+                partion(s,l,l1,i+1);
+                l1.remove(l1.size()-1);
+                
+            }
         }
     }
-    public List<String> generateParenthesis(int n) {
-        List<String>s1=new ArrayList<>();
-        String s="";
-        buildParenthesis(n,0,0,0,s1,s);
-        return s1;
-        
+    public boolean isPallindrom(String s,int low,int high)
+    {
+        while(low<high)
+        {
+            if(s.charAt(low)!=s.charAt(high))
+            {
+                return false;
+            }
+            else
+            {
+            low++;
+            high--;
+            }
+        }
+        return true;
     }
 }
