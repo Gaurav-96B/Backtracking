@@ -1,24 +1,24 @@
 class Solution {
     public List<List<String>> partition(String s) {
-        List<List<String>>l=new ArrayList<>();
-        List<String>l1=new ArrayList<>();
-        partion(s,l,l1,0);
-        return l;
-        
+        List<List<String>>ans=new ArrayList<>();
+        List<String>curr=new ArrayList<>();
+        partion(s,ans,curr,0);
+        return ans;
+           
     }
-    public void partion(String s,List<List<String>>l,List<String>l1,int startIndex)
+    public void partion(String s,List<List<String>>ans,List<String>curr,int startIndex)
     {
         if(startIndex==s.length())
         {
-            l.add(new ArrayList<>(l1));
+            ans.add(new ArrayList<>(curr));
         }
         for(int i=startIndex;i<s.length();i++)
         {
             if(isPallindrom(s,startIndex,i))
             {
-                l1.add(s.substring(startIndex,i+1));
-                partion(s,l,l1,i+1);
-                l1.remove(l1.size()-1);
+                curr.add(s.substring(startIndex,i+1));
+                partion(s,ans,curr,i+1);
+                curr.remove(curr.size()-1);
                 
             }
         }
