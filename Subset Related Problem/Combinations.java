@@ -1,26 +1,28 @@
 class Solution {
     public List<List<Integer>> combine(int n, int k) {
-        int candidate[]=new int[n];
+        int candidates[]=new int[n];
+        int z=1;
         for(int i=0;i<n;i++)
         {
-            candidate[i]=i+1;
+            candidates[i]=z;
+            z++;
         }
         List<List<Integer>>ans=new ArrayList<>();
         List<Integer>curr=new ArrayList<>();
-        combin(candidate,0,ans,curr,k);
+        buildCombinition(candidates,ans,curr,k,0);
         return ans;
         
     }
-    public void combin(int candidate[],int startIndex,List<List<Integer>>ans,List<Integer>curr,int k)
+    public void buildCombinition(int candidates[],List<List<Integer>>ans,List<Integer>curr,int k,int startIndex)
     {
-       if(curr.size()==k)
-       {
-           ans.add(new ArrayList<>(curr));
-       }
-        for(int i=startIndex;i<candidate.length;i++)
+        if(curr.size()==k)
         {
-            curr.add(candidate[i]);
-            combin(candidate,i,ans,curr,k);
+            ans.add(new ArrayList<>(curr));
+        }
+        for(int i=startIndex;i<candidates.length;i++)
+        {
+            curr.add(candidates[i]);
+            buildCombinition(candidates,ans,curr,k,i+1);
             curr.remove(curr.size()-1);
         }
     }
