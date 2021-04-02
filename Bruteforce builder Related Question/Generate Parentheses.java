@@ -1,25 +1,24 @@
 class Solution {
-    public void buildParenthesis(int n,int open,int close,int index,List<String>s1,String s)
+    public List<String> generateParenthesis(int n) {
+        List<String>ans=new ArrayList<>();
+        String curr="";
+        buildParenthesis(n,0,0,0,ans,curr);
+        return ans;   
+    }
+public void buildParenthesis(int n,int open,int close,int index,List<String>ans,String curr)
     {
         if(index==2*n)
         {
-            s1.add(s);
+            ans.add(curr);
             return;
         }
         if(open<n)
         {
-            buildParenthesis(n,open+1,close,index+1,s1,s+"(");
+            buildParenthesis(n,open+1,close,index+1,ans,curr+"(");
         }
         if(close<open)
         {
-            buildParenthesis(n,open,close+1,index+1,s1,s+")");
+            buildParenthesis(n,open,close+1,index+1,ans,curr+")");
         }
-    }
-    public List<String> generateParenthesis(int n) {
-        List<String>s1=new ArrayList<>();
-        String s="";
-        buildParenthesis(n,0,0,0,s1,s);
-        return s1;
-        
-    }
+    }   
 }
