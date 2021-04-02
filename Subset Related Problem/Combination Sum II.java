@@ -1,22 +1,21 @@
 class Solution {
-    public List<List<Integer>> combinationSum2(int[] candidates, int target)
-    {
-        List<List<Integer>>result=new ArrayList<>();
-        List<Integer>combination=new ArrayList<>();
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>>ans=new ArrayList<>();
+        List<Integer>curr=new ArrayList<>();
         if(candidates==null||candidates.length==0)
         {
-            return result;
+            return ans;
         }
         Arrays.sort(candidates);
-        CombinationSum(candidates,result,combination,0,target);
-        return result;
+        CombinationSum(candidates,ans,curr,0,target);
+        return ans;
         
     }
-    public void CombinationSum(int candidates[],List<List<Integer>>l,List<Integer>combination,int startindex,int target)
+     public void CombinationSum(int candidates[],List<List<Integer>>ans,List<Integer>curr,int startindex,int target)
     {
       if(target==0)
       {
-          l.add(new ArrayList<>(combination));
+          ans.add(new ArrayList<>(curr));
           return;
       }
     for(int i=startindex;i<candidates.length;i++)
@@ -29,14 +28,10 @@ class Solution {
         {
             break;
         }
-        combination.add(candidates[i]);
-        CombinationSum(candidates,l,combination,i+1,target-candidates[i]);
-        combination.remove(combination.size()-1);
+        curr.add(candidates[i]);
+        CombinationSum(candidates,ans,curr,i+1,target-candidates[i]);
+        curr.remove(curr.size()-1);
     }
     
-    }
-    
-    
-    
-    
+}
 }
