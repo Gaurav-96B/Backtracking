@@ -1,34 +1,27 @@
 class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) 
-    {
-        List<List<Integer>>result=new ArrayList<>();
-        List<Integer>combination=new ArrayList<>();
-        if(candidates==null||candidates.length==0)
-        {
-            return result;
-        }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
         Arrays.sort(candidates);
-        CombinationSum(candidates,result,combination,0,target);
-        return result;
-         
+        List<List<Integer>>ans=new ArrayList<>();
+        List<Integer>curr=new ArrayList<>();
+        combineSum(candidates,ans,curr,0,target);
+        return ans;
+        
     }
-public void CombinationSum(int candidates[],List<List<Integer>>l,List<Integer>combination,int startindex,int target)
+public void combineSum(int candidates[],List<List<Integer>>ans,List<Integer>curr,int startIndex,int target)
     {
-      if(target==0)
-      {
-          l.add(new ArrayList<>(combination));
-          return;
-      }
-    for(int i=startindex;i<candidates.length;i++)
-    {
-        if(candidates[i]>target)
+        if(target==0)
         {
-            break;
+            ans.add(new ArrayList<>(curr));
         }
-        combination.add(candidates[i]);
-        CombinationSum(candidates,l,combination,i,target-candidates[i]);
-        combination.remove(combination.size()-1);
-    }
-    
+        for(int i=startIndex;i<candidates.length;i++)
+        {
+            if(candidates[i]>target)
+            {
+               break;
+            }
+            curr.add(candidates[i]);
+            combineSum(candidates,ans,curr,i,target-candidates[i]);
+            curr.remove(curr.size()-1);
+        }
     }
 }
