@@ -5,6 +5,7 @@ class Solution {
         {
             return ans;
         }
+        StringBuilder curr=new StringBuilder();
         Map<Character,String>map=new HashMap<>();
         map.put('2',"abc");
         map.put('3',"def");
@@ -14,25 +15,24 @@ class Solution {
         map.put('7',"pqrs");
         map.put('8',"tuv");
         map.put('9',"wxyz");
-        lc(digits,0,map,ans,new StringBuilder());
-        return ans;   
+        letterCombine(digits,ans,curr,map,0);  
+        return ans;
     }
-    public void lc(String digits,int i,Map<Character,String>map,List<String>ans,StringBuilder sb)
+    public void letterCombine(String digits,List<String>ans,StringBuilder curr,Map<Character,String>map,int i)
     {
-      if(i==digits.length()) 
-      {
-          ans.add(sb.toString());
-          return;
-      }
-        String curr=map.get(digits.charAt(i));
-        for(int k=0;k<curr.length();k++)
+        if(i==digits.length())
         {
-            sb.append(curr.charAt(k));
-            lc(digits,i+1,map,ans,sb);
-            sb.deleteCharAt(sb.length()-1);
+            ans.add(curr.toString());
+            return;
         }
+        String first=map.get(digits.charAt(i));
+        for(int k=0;k<first.length();k++)
+        {
+            curr.append(first.charAt(k));
+            letterCombine(digits,ans,curr,map,i+1);
+            curr.deleteCharAt(curr.length()-1);
+        }
+        
     }
-    
-    
     
 }
