@@ -1,27 +1,27 @@
 class Solution {
     
-   public static void findPath1(int m[][],int i,int j,ArrayList<String>ans,String s)
+   public static void findPath1(int m[][],int x,int y,ArrayList<String>ans,String curr)
    {
-     if(i<0||i>=m.length||j<0||j>=m.length||m[i][j]==0)
-     {
-         return;
-     }
-     if(i==m.length-1&&j==m.length-1)
+    if(x<0||x>=m.length||y<0||y>=m[x].length||m[x][y]==0)
     {
-            ans.add(s+"");
-            return;
+        return;
     }
-    m[i][j]=0;
-    findPath1(m,i+1,j,ans,s+"D");
-    findPath1(m,i,j-1,ans,s+"L");
-    findPath1(m,i,j+1,ans,s+"R");
-    findPath1(m,i-1,j,ans,s+"U");
-    m[i][j]=1;
+    if(x==m.length-1&&y==m.length-1)
+    {
+        ans.add(curr);
+    }
+    m[x][y]=0;
+    findPath1(m,x+1,y,ans,curr+'D');
+    findPath1(m,x,y-1,ans,curr+'L');
+    findPath1(m,x,y+1,ans,curr+'R');
+    findPath1(m,x-1,y,ans,curr+'U');
+    m[x][y]=1;
    }
     public static ArrayList<String> findPath(int[][] m, int n) {
         ArrayList<String>ans=new ArrayList<>();
-        String s="";
-        findPath1(m,0,0,ans,s);
+        String curr="";
+        findPath1(m,0,0,ans,curr);
         return ans;
+        
     }
 }
