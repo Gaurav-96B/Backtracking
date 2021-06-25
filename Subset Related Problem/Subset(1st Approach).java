@@ -9,7 +9,7 @@ class Solution {
     public void buildSubset(int nums[],List<List<Integer>>ans,List<Integer>curr,int startIndex)
     {
 
-            ans.add(new ArrayList<>(curr));
+        ans.add(new ArrayList<>(curr));
         for(int i=startIndex;i<nums.length;i++)
         {
             curr.add(nums[i]);
